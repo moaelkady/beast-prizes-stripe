@@ -1,0 +1,21 @@
+.loader {
+    color: var(--primary-yello);
+    width: 100px;
+    height: 100px;
+    border-top: solid;
+    border-radius: 50%;
+    animation: spin 800ms linear infinite;
+    position: fixed;
+    bottom: calc(50% - 50px);
+    left: calc(50% - 50px);
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
