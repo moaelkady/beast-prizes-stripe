@@ -29,6 +29,20 @@ const BuyTicket = () => {
       </div>
       <div className="buy-ticket-form">
         <h3>By a ticket and we will email you with your prize</h3>
+        <p className="warning">
+          This is just a test project, don't try to buy anything with your
+          actual data
+          <br />
+          To try the payment use this card information
+          <br />
+          Card Number : 4242 4242 4242 4242
+          <br />
+          Exp. date: 04 / 24
+          <br />
+          CVC: 242
+          <br />
+          ZIP: 42424
+        </p>
         <PaymentForm />
       </div>
     </div>
