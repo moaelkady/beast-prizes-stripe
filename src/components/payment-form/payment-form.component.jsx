@@ -12,6 +12,7 @@ const defaultFormFields = {
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { userName, userEmail, amount } = formFields;
 
@@ -29,6 +30,9 @@ const PaymentForm = () => {
     if (!stripe || !elements) {
       return;
     }
+
+    setIsProcessingPayment(true);
+
     const response = await fetch("/.netlify/functions/create-payment-intent", {
       method: "post",
       headers: {
@@ -49,6 +53,9 @@ const PaymentForm = () => {
         },
       },
     });
+
+    setIsProcessingPayment(false);
+
     if (paymentResult.error) {
       resetFormFields();
       alert(paymentResult.error.message);
@@ -81,6 +88,8 @@ const PaymentForm = () => {
           />
           <input
             type="number"
+            min="1"
+            max="999999"
             name="amount"
             placeholder="Enter The Amount in just numbers: 5, 10, 15, 20"
             value={amount}
@@ -91,7 +100,10 @@ const PaymentForm = () => {
         <br />
         <CardElement />
         <br />
-        <button>Pay Now</button>
+        <button className={isProcessingPayment ? "btn-loading" : ""}>
+          <span className="btn-loader"></span>
+          <span className="btn-name">Pay Now</span>
+        </button>
       </form>
     </div>
   );
