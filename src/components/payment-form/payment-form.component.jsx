@@ -6,7 +6,7 @@ import "./payment-form.styles.scss";
 const defaultFormFields = {
   userName: "",
   userEmail: "",
-  amount: 0,
+  amount: "",
 };
 
 const PaymentForm = () => {
