@@ -6,14 +6,14 @@ import "./payment-form.styles.scss";
 const defaultFormFields = {
   userName: "",
   userEmail: "",
-  userAmount: 0,
+  amount: 0,
 };
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { userName, userEmail, userAmount } = formFields;
+  const { userName, userEmail, amount } = formFields;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,7 +34,7 @@ const PaymentForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: userAmount * 100 }),
+      body: JSON.stringify({ amount: amount * 100 }),
     }).then((res) => {
       return res.json();
     });
@@ -46,7 +46,7 @@ const PaymentForm = () => {
         billing_details: {
           name: userName ? userName : "Not typed",
           email: userEmail ? userEmail : "Not typed",
-          amount: userAmount ? userAmount : "no amount",
+          amount: amount ? amount : "no amount",
         },
       },
     });
@@ -82,9 +82,9 @@ const PaymentForm = () => {
           />
           <input
             type="number"
-            name="userAmount"
+            name="amount"
             placeholder="Enter The Amount in just numbers: 5, 10, 15, 20"
-            value={userAmount}
+            value={amount}
             onChange={handleChange}
             required
           />
