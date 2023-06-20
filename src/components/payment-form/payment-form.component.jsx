@@ -46,7 +46,6 @@ const PaymentForm = () => {
         billing_details: {
           name: userName ? userName : "Not typed",
           email: userEmail ? userEmail : "Not typed",
-          amount: amount ? amount : "no amount",
         },
       },
     });
