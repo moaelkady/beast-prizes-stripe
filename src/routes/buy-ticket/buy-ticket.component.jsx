@@ -31,9 +31,10 @@ const BuyTicket = () => {
         <h3>By a ticket and we will email you with your prize</h3>
         <p className="warning">
           This is just a test project, don't try to buy anything with your
-          actual data
+          actual data but if you need it to be true tell that to Mr Beast :D
           <br />
-          To try the payment use this card information
+          <br />
+          To try the payment use this card information:
           <br />
           Card Number : 4242 4242 4242 4242
           <br />

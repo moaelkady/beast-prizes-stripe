@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import Logo from "../../assets/imgs/logo.webp";
 import "./navigation.styles.scss";
 
 const Navigation = () => {
@@ -23,7 +24,7 @@ const Navigation = () => {
     <Fragment>
       <div className="navigation-container">
         <div className="logo-container">
-          <span>LOGO</span>
+          <img src={Logo} alt="logo" width="250px" height="50px" />
         </div>
         <div
           className={
@@ -39,11 +40,6 @@ const Navigation = () => {
           <NavLink to="/buy-ticket" onClick={handleMenuItemClick}>
             Join Us
           </NavLink>
-          <div className="donate-link">
-            <Link to="/buy-ticket" onClick={handleMenuItemClick}>
-              Donate Now
-            </Link>
-          </div>
         </div>
         <div className="hamburger-menu-toggler">
           <label className="hamburger">

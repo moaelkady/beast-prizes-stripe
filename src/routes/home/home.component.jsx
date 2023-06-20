@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Button from "../../components/button/button.component";
 import Footer from "../../components/footer/footer.component";
 import BoxData from "../../components/box-data/box-data.component";
-import OfficeImg from "../../assets/imgs/office.webp";
+import TogetherImg from "../../assets/imgs/together.webp";
 import SubscripeForm from "../../components/subscripe-form/subscripe-form.component";
 import { INTRO_BOX_DATA } from "../../data/data";
 import "./home.styles.scss";
@@ -27,7 +27,7 @@ const Home = () => {
       </div>
       <div className="tickets-prices-section">
         <div className="img-container">
-          <img src={OfficeImg} alt="buy-ticket" width="100px" height="100px" />
+          <img src={TogetherImg} alt="buy-ticket" width="100px" height="100px" />
         </div>
         <div className="description-container">
           <h3>JOIN US NOW</h3>
@@ -38,7 +38,7 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <div className="past-winners">
+      {/*<div className="past-winners">
         <h3>#Past Winners</h3>
         <div className="imgs-container">
           <div className="row">
@@ -120,7 +120,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+        </div>*/}
       <div className="subscripe-section">
         <SubscripeForm />
       </div>

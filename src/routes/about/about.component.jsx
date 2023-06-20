@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import AboutImg from "../../assets/imgs/about.webp";
-import MrBeast from "../../assets/mrBeast.png";
+import MrBeast from "../../assets/imgs/mrbeastteam.webp";
 import Button from "../../components/button/button.component";
 
 import "./about.styles.scss";
@@ -9,7 +8,7 @@ const About = () => {
   return (
     <div className="about-route-container route-container">
       <div className="about-header-img">
-        <img src={AboutImg} alt="About header" width="100px" height="100px" />
+        <img src={MrBeast} alt="About header" width="100px" height="100px" />
       </div>
       <div className="about-description">
         <h2>WHO WE ARE</h2>
@@ -51,9 +50,6 @@ const About = () => {
         <Link to="/buy-ticket">
           <Button>JOIN US</Button>
         </Link>
-      </div>
-      <div className="about-header-img">
-        <img src={MrBeast} alt="About header" width="100px" height="100px" />
       </div>
     </div>
   );
