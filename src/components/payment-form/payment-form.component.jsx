@@ -1,11 +1,28 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useState } from "react";
 
-import { FormContainer } from "./payment-form.styles";
-import { PaymentButton, PaymentFormContainer } from "./payment-form.styles";
+import "./payment-form.styles.scss";
+
+const defaultFormFields = {
+  userName: "",
+  userEmail: "",
+  userAmount: 0,
+};
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { userName, userEmail, userAmount } = formFields;
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormFields({ ...formFields, [name]: value });
+  };
+
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
 
   const paymentHandler = async (e) => {
     e.preventDefault();
@@ -17,7 +34,7 @@ const PaymentForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: 10000 }),
+      body: JSON.stringify({ amount: userAmount * 100 }),
     }).then((res) => {
       return res.json();
     });
@@ -27,11 +44,14 @@ const PaymentForm = () => {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-          name: "Yihua Zhang",
+          name: userName ? userName : "Not typed",
+          email: userEmail ? userEmail : "Not typed",
+          amount: userAmount ? userAmount : "no amount",
         },
       },
     });
     if (paymentResult.error) {
+      resetFormFields();
       alert(paymentResult.error.message);
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
@@ -41,13 +61,40 @@ const PaymentForm = () => {
   };
 
   return (
-    <PaymentFormContainer>
-      <FormContainer onSubmit={paymentHandler}>
-        <h2>Credit Card Payment:</h2>
+    <div className="payment-form-container">
+      <form className="form-container" onSubmit={paymentHandler}>
+        <div className="personal-info">
+          <input
+            type="text"
+            name="userName"
+            placeholder="Enter Your Name"
+            value={userName}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="userEmail"
+            placeholder="Enter Your Email"
+            value={userEmail}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="number"
+            name="userAmount"
+            placeholder="Enter The Amount in just numbers: 5, 10, 15, 20"
+            value={userAmount}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <br />
         <CardElement />
-        <PaymentButton>Pay Now</PaymentButton>
-      </FormContainer>
-    </PaymentFormContainer>
+        <br />
+        <button>Pay Now</button>
+      </form>
+    </div>
   );
 };
 export default PaymentForm;
