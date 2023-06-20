@@ -8,9 +8,6 @@ import { INTRO_BOX_DATA } from "../../data/data";
 import "./home.styles.scss";
 
 const Home = () => {
-  alert(
-    "Please notice this is just a project, Don't try to buy anything with your actual data"
-  );
   return (
     <div className="home-route-container route-container">
       <div className="header-container">

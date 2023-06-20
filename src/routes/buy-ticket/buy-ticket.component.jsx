@@ -2,9 +2,6 @@ import PaymentForm from "../../components/payment-form/payment-form.component";
 import "./buy-ticket.styles.scss";
 
 const BuyTicket = () => {
-  alert(
-    "Please notice this is just a project, Don't try to buy anything with your actual data"
-  );
   return (
     <div className="buy-ticket-route-container route-container">
       <div className="header-img-container">
