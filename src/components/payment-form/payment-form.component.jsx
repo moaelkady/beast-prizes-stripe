@@ -1,5 +1,5 @@
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import "./payment-form.styles.scss";
 
@@ -13,6 +13,7 @@ const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { userName, userEmail, amount } = formFields;
 
@@ -61,50 +62,61 @@ const PaymentForm = () => {
       alert(paymentResult.error.message);
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
-        alert("Payment Successful!");
+        setPaymentSuccess(true);
       }
     }
   };
 
+  const resetPaymentStatus = () => {
+    setPaymentSuccess(false);
+  };
+
   return (
     <div className="payment-form-container">
-      <form className="form-container" onSubmit={paymentHandler}>
-        <div className="personal-info">
-          <input
-            type="text"
-            name="userName"
-            placeholder="Enter Your Name"
-            value={userName}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="email"
-            name="userEmail"
-            placeholder="Enter Your Email"
-            value={userEmail}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="number"
-            min="1"
-            max="999999"
-            name="amount"
-            placeholder="Enter The Amount in just numbers: 5, 10, 15, 20"
-            value={amount}
-            onChange={handleChange}
-            required
-          />
+      {paymentSuccess ? (
+        <div className="payment-success-box">
+          <p>Thank you we recieved your payment</p>
+          <button onClick={resetPaymentStatus}>Pay again</button>
         </div>
-        <br />
-        <CardElement />
-        <br />
-        <button className={isProcessingPayment ? "btn-loading" : ""}>
-          <span className="btn-loader"></span>
-          <span className="btn-name">Pay Now</span>
-        </button>
-      </form>
+      ) : (
+        <form className="form-container" onSubmit={paymentHandler}>
+          <div className="personal-info">
+            <input
+              type="text"
+              name="userName"
+              placeholder="Enter Your Name"
+              value={userName}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="email"
+              name="userEmail"
+              placeholder="Enter Your Email"
+              value={userEmail}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="number"
+              min="1"
+              max="999999"
+              name="amount"
+              placeholder="Enter The Amount in just numbers: 5, 10, 15, 20"
+              value={amount}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <br />
+          <CardElement />
+          <br />
+          <button className={isProcessingPayment ? "btn-loading" : ""}>
+            <span className="btn-loader"></span>
+            <span className="btn-name">Pay Now</span>
+          </button>
+        </form>
+      )}
     </div>
   );
 };

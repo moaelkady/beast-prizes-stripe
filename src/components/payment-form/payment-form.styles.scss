@@ -2,6 +2,32 @@
   font-family: "OswaldMedium";
   width: 80%;
   margin: auto;
+  .payment-success-box {
+    p {
+      text-align: center;
+      letter-spacing: 1px;
+      margin: 25px 0;
+    }
+    button {
+      margin: auto;
+      display: block;
+      padding: 20px;
+      width: 200px;
+      background-color: transparent;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      font-family: "OswaldMedium";
+      letter-spacing: 2px;
+      font-weight: 600;
+      transition: 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      &:hover {
+        background: var(--primary-color);
+        color: #fff;
+      }
+    }
+  }
   .form-container {
     width: 100%;
     .personal-info {
